@@ -1,0 +1,72 @@
+/* =========================================================
+   Responsive breakpoints
+   640px / 900px / 1200px
+   ========================================================= */
+
+/* Tablet up */
+@media (min-width: 640px) {
+  .grid--2 { grid-template-columns: repeat(2, 1fr); }
+  .grid--3 { grid-template-columns: repeat(2, 1fr); }
+  .grid--4 { grid-template-columns: repeat(2, 1fr); }
+
+  .trust-bar__row { grid-template-columns: repeat(4, 1fr); }
+
+  .ba-row { grid-template-columns: repeat(2, 1fr); }
+
+  .form-row { grid-template-columns: repeat(2, 1fr); }
+  .form-row--3 { grid-template-columns: repeat(3, 1fr); }
+
+  .price-grid { grid-template-columns: repeat(3, 1fr); }
+
+  .blog-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; }
+
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .steps { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Desktop up */
+@media (min-width: 900px) {
+  :root { --header-h: 80px; }
+
+  .grid--3 { grid-template-columns: repeat(3, 1fr); }
+  .grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+  .blog-grid { grid-template-columns: repeat(3, 1fr); }
+
+  .why-grid { grid-template-columns: repeat(4, 1fr); }
+
+  .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
+
+  .hero__grid { grid-template-columns: 1.1fr 1fr; gap: var(--space-8); }
+
+  /* Show desktop nav, hide mobile-only items */
+  .primary-nav { display: block; }
+  .header-cta { display: inline-flex; }
+  .menu-toggle { display: none; }
+  .mobile-drawer { display: none; }
+  .bottom-cta { display: none; }
+}
+
+/* Wide */
+@media (min-width: 1200px) {
+  .section { padding-block: var(--space-9); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* Print */
+@media print {
+  .site-header, .site-footer, .bottom-cta, .mobile-drawer { display: none; }
+  body { background: white; color: black; }
+}

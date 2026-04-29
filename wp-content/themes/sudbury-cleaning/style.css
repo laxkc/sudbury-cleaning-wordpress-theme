@@ -1,0 +1,158 @@
+/*
+Theme Name: Sudbury Cleaning
+Theme URI: https://example.com/sudbury-cleaning
+Author: Laxman KC
+Author URI: https://example.com
+Description: Custom WordPress theme for Sudbury Sparkle Cleaning Co. — a portfolio-grade local business site. No page builders, no premium plugins.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.5
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: sudbury-cleaning
+Tags: business, custom, responsive, blog, accessibility-ready
+*/
+
+/* =========================================================
+   1. Brand tokens
+   ========================================================= */
+:root {
+  /* Brand colors */
+  --brand-blue: #1E3A8A;
+  --brand-blue-dark: #172E6E;
+  --brand-mint: #10B981;
+  --brand-mint-dark: #059669;
+  --brand-orange: #F59E0B;
+  --brand-orange-dark: #D97706;
+  --brand-orange-text: #B45309;
+
+  /* Neutrals */
+  --bg-white: #FFFFFF;
+  --bg-grey: #F3F4F6;
+  --border: #E5E7EB;
+  --text: #111827;
+  --text-muted: #4B5563;
+  --text-inverse: #FFFFFF;
+
+  /* Typography */
+  --font-heading: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Spacing scale (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  /* Radius + shadow */
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.06);
+  --shadow: 0 4px 12px rgba(17, 24, 39, 0.08);
+  --shadow-lg: 0 12px 32px rgba(17, 24, 39, 0.12);
+
+  /* Layout */
+  --container: 1200px;
+  --header-h: 72px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur: 180ms;
+}
+
+/* =========================================================
+   2. Reset
+   ========================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, video { max-width: 100%; height: auto; display: block; }
+
+/* Global SVG normalization (principle #6).
+   Every icon scales with its parent's font-size. No per-icon overrides needed. */
+svg {
+  width: 1em;
+  height: 1em;
+  display: block;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+button, input, select, textarea { font: inherit; color: inherit; }
+
+a { color: var(--brand-blue); text-decoration: none; transition: color var(--dur) var(--ease); }
+a:hover { color: var(--brand-blue-dark); }
+a:focus-visible { outline: 3px solid var(--brand-mint); outline-offset: 2px; border-radius: 2px; }
+
+ul, ol { padding-left: 1.25rem; }
+
+hr { border: 0; border-top: 1px solid var(--border); margin: var(--space-6) 0; }
+
+/* =========================================================
+   3. Typography
+   ========================================================= */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--brand-blue);
+  line-height: 1.2;
+  margin: 0 0 var(--space-4);
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: clamp(2rem, 1.4rem + 2.5vw, 3.25rem); }
+h2 { font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem); }
+h3 { font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem); font-weight: 600; }
+h4 { font-size: 1.125rem; font-weight: 600; }
+
+p { margin: 0 0 var(--space-4); }
+
+p, li { color: var(--text); }
+
+.lead { font-size: 1.125rem; color: var(--text-muted); }
+
+.muted { color: var(--text-muted); }
+
+::selection { background: var(--brand-mint); color: var(--bg-white); }
+
+/* =========================================================
+   4. Accessibility helpers
+   ========================================================= */
+.screen-reader-text {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  width: 1px; height: 1px;
+  overflow: hidden;
+  word-wrap: normal !important;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: var(--space-3) var(--space-4);
+  background: var(--brand-mint);
+  color: var(--text-inverse);
+  font-weight: 600;
+}
+.skip-link:focus { left: var(--space-3); top: var(--space-3); color: var(--text-inverse); }
