@@ -200,13 +200,28 @@ Single source of truth: global rule `svg { width: 1em; height: 1em }` plus a reu
 
 ## Screenshots
 
-> _Add screenshots in `wp-content/themes/sudbury-cleaning/assets/images/screenshots/` and link them here._
+All screenshots live in `wp-content/themes/sudbury-cleaning/assets/images/screenshots/`.
 
-- Homepage (desktop / mobile)
-- Services page
-- Contact form
-- Pricing page
-- Customizer panel
+### Homepage
+![Homepage](wp-content/themes/sudbury-cleaning/assets/images/screenshots/01-homepage.png)
+
+### Homepage — mobile
+<img src="wp-content/themes/sudbury-cleaning/assets/images/screenshots/02-homepage-mobile.png" alt="Homepage on mobile" width="320">
+
+### Services page
+![Services page](wp-content/themes/sudbury-cleaning/assets/images/screenshots/03-services.png)
+
+### Pricing page
+![Pricing page](wp-content/themes/sudbury-cleaning/assets/images/screenshots/04-pricing.png)
+
+### Contact / Quote form
+![Contact form](wp-content/themes/sudbury-cleaning/assets/images/screenshots/05-contact-form.png)
+
+### Customizer — Sparkle Theme panel
+![Customizer panel](wp-content/themes/sudbury-cleaning/assets/images/screenshots/06-customizer.png)
+
+### Quote Requests admin (CPT inbox)
+![Quote requests admin](wp-content/themes/sudbury-cleaning/assets/images/screenshots/07-quote-requests-admin.png)
 
 ---
 
@@ -240,5 +255,3 @@ Single source of truth: global rule `svg { width: 1em; height: 1em }` plus a reu
 
 - GitHub: [@laxkc](https://github.com/laxkc)
 - LinkedIn: [linkedin.com/in/laxmankc](https://www.linkedin.com/in/laxmankc/)
-
-License: GPL v2 or later

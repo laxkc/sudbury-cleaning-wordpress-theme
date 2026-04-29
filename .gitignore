@@ -32,6 +32,7 @@ error_log
 # Tooling / dependencies (in case of future build pipeline)
 # =========================================================
 node_modules/
+.cache/
 vendor/
 dist/
 build/
