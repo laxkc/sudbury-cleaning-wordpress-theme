@@ -225,19 +225,6 @@ All screenshots live in `wp-content/themes/sudbury-cleaning/assets/images/screen
 
 ---
 
-## What This Project Demonstrates
-
-- Theme + plugin separation done right — content survives theme changes, theme is replaceable
-- Custom WordPress build from scratch, no page builders
-- Understanding of WordPress core: template hierarchy, action/filter hooks, Customizer API, CPTs, taxonomies
-- Secure form handling without plugin dependencies (nonce + honeypot + rate limit + sanitize + validate)
-- Local SEO implementation — JSON-LD schema, neighborhood landing pages, OG/Twitter Card
-- Clean, maintainable project structure with clear separation of concerns
-- Token-based design system applied consistently across components
-- Real-world local-business use case end-to-end
-
----
-
 ## Future Improvements
 
 - Booking calendar with available time slots
