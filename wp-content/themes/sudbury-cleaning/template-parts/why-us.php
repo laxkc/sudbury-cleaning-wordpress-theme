@@ -21,7 +21,7 @@ $reasons = [
     <div class="why-grid">
       <?php foreach ($reasons as $r): ?>
         <div class="why-item">
-          <span class="icon-label__icon"><?php nova_print_icon('check', 16); ?></span>
+          <span class="icon-label__icon"><?php sudbury_print_icon('check', 16); ?></span>
           <div>
             <h4><?php echo esc_html($r['title']); ?></h4>
             <p class="muted"><?php echo esc_html($r['body']); ?></p>

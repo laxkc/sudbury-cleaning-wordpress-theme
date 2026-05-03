@@ -28,9 +28,9 @@ $steps = [
     </div>
 
     <div class="cta-banner__actions" style="margin-top: var(--space-7);">
-      <a class="btn btn--primary btn--lg" href="<?php echo esc_url(nova_quote_url()); ?>">
+      <a class="btn btn--primary btn--lg" href="<?php echo esc_url(sudbury_quote_url()); ?>">
         <span><?php esc_html_e('Get my free quote', 'sudbury-cleaning'); ?></span>
-        <span class="icon-label__icon"><?php nova_print_icon('arrow-right', 14); ?></span>
+        <span class="icon-label__icon"><?php sudbury_print_icon('arrow-right', 14); ?></span>
       </a>
     </div>
   </div>

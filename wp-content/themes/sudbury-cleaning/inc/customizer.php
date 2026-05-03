@@ -10,15 +10,15 @@ add_action('customize_register', function (WP_Customize_Manager $wp_customize) {
     /* =====================================================
        PANEL: Sparkle Theme
        ===================================================== */
-    $wp_customize->add_panel('nova_sparkle', [
+    $wp_customize->add_panel('sudbury_sparkle', [
         'title'    => __('Sparkle Theme', 'sudbury-cleaning'),
         'priority' => 30,
     ]);
 
     /* ---------- Section: Site Settings ---------- */
-    $wp_customize->add_section('nova_site', [
+    $wp_customize->add_section('sudbury_site', [
         'title' => __('Site Settings', 'sudbury-cleaning'),
-        'panel' => 'nova_sparkle',
+        'panel' => 'sudbury_sparkle',
     ]);
 
     $site_fields = [
@@ -36,22 +36,22 @@ add_action('customize_register', function (WP_Customize_Manager $wp_customize) {
     ];
 
     foreach ($site_fields as $key => $cfg) {
-        $wp_customize->add_setting('nova_' . $key, [
-            'default'           => nova_default($key),
+        $wp_customize->add_setting('sudbury_' . $key, [
+            'default'           => sudbury_default($key),
             'sanitize_callback' => $cfg['type'] === 'email' ? 'sanitize_email' : ($cfg['type'] === 'url' ? 'esc_url_raw' : 'sanitize_text_field'),
             'transport'         => 'refresh',
         ]);
-        $wp_customize->add_control('nova_' . $key, [
+        $wp_customize->add_control('sudbury_' . $key, [
             'label'   => $cfg['label'],
-            'section' => 'nova_site',
+            'section' => 'sudbury_site',
             'type'    => $cfg['type'],
         ]);
     }
 
     /* ---------- Section: Hero ---------- */
-    $wp_customize->add_section('nova_hero', [
+    $wp_customize->add_section('sudbury_hero', [
         'title' => __('Homepage Hero', 'sudbury-cleaning'),
-        'panel' => 'nova_sparkle',
+        'panel' => 'sudbury_sparkle',
     ]);
 
     $hero_fields = [
@@ -63,32 +63,32 @@ add_action('customize_register', function (WP_Customize_Manager $wp_customize) {
     ];
 
     foreach ($hero_fields as $key => $cfg) {
-        $wp_customize->add_setting('nova_' . $key, [
-            'default'           => nova_default($key),
+        $wp_customize->add_setting('sudbury_' . $key, [
+            'default'           => sudbury_default($key),
             'sanitize_callback' => $cfg['type'] === 'url' ? 'esc_url_raw' : 'sanitize_text_field',
             'transport'         => 'refresh',
         ]);
-        $wp_customize->add_control('nova_' . $key, [
+        $wp_customize->add_control('sudbury_' . $key, [
             'label'   => $cfg['label'],
-            'section' => 'nova_hero',
+            'section' => 'sudbury_hero',
             'type'    => $cfg['type'],
         ]);
     }
 
     /* Hero image */
-    $wp_customize->add_setting('nova_hero_image', [
+    $wp_customize->add_setting('sudbury_hero_image', [
         'default'           => '',
         'sanitize_callback' => 'esc_url_raw',
     ]);
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'nova_hero_image', [
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'sudbury_hero_image', [
         'label'   => __('Hero image', 'sudbury-cleaning'),
-        'section' => 'nova_hero',
+        'section' => 'sudbury_hero',
     ]));
 
     /* ---------- Section: Trust Bar ---------- */
-    $wp_customize->add_section('nova_trust', [
+    $wp_customize->add_section('sudbury_trust', [
         'title' => __('Trust Bar', 'sudbury-cleaning'),
-        'panel' => 'nova_sparkle',
+        'panel' => 'sudbury_sparkle',
     ]);
 
     $trust_defaults = [
@@ -99,13 +99,13 @@ add_action('customize_register', function (WP_Customize_Manager $wp_customize) {
     ];
 
     foreach ($trust_defaults as $i => $defaults) {
-        $wp_customize->add_setting("nova_trust_{$i}_icon", [
+        $wp_customize->add_setting("sudbury_trust_{$i}_icon", [
             'default'           => $defaults['icon'],
             'sanitize_callback' => 'sanitize_text_field',
         ]);
-        $wp_customize->add_control("nova_trust_{$i}_icon", [
+        $wp_customize->add_control("sudbury_trust_{$i}_icon", [
             'label'    => sprintf(__('Trust item %d — icon', 'sudbury-cleaning'), $i),
-            'section'  => 'nova_trust',
+            'section'  => 'sudbury_trust',
             'type'     => 'select',
             'choices'  => [
                 'star'    => 'Star',
@@ -117,27 +117,27 @@ add_action('customize_register', function (WP_Customize_Manager $wp_customize) {
             ],
         ]);
 
-        $wp_customize->add_setting("nova_trust_{$i}_text", [
+        $wp_customize->add_setting("sudbury_trust_{$i}_text", [
             'default'           => $defaults['text'],
             'sanitize_callback' => 'sanitize_text_field',
         ]);
-        $wp_customize->add_control("nova_trust_{$i}_text", [
+        $wp_customize->add_control("sudbury_trust_{$i}_text", [
             'label'   => sprintf(__('Trust item %d — text', 'sudbury-cleaning'), $i),
-            'section' => 'nova_trust',
+            'section' => 'sudbury_trust',
             'type'    => 'text',
         ]);
     }
 
     /* ---------- Section: Brand Colors ---------- */
-    $wp_customize->add_section('nova_brand', [
+    $wp_customize->add_section('sudbury_brand', [
         'title' => __('Brand Colors', 'sudbury-cleaning'),
-        'panel' => 'nova_sparkle',
+        'panel' => 'sudbury_sparkle',
     ]);
 
     $colors = [
-        'nova_brand_blue'   => ['label' => __('Primary (Deep Blue)', 'sudbury-cleaning'),   'default' => '#1E3A8A'],
-        'nova_brand_mint'   => ['label' => __('Secondary (Mint Green)', 'sudbury-cleaning'), 'default' => '#10B981'],
-        'nova_brand_orange' => ['label' => __('Accent (Soft Orange)', 'sudbury-cleaning'),  'default' => '#F59E0B'],
+        'sudbury_brand_blue'   => ['label' => __('Primary (Deep Blue)', 'sudbury-cleaning'),   'default' => '#1E3A8A'],
+        'sudbury_brand_mint'   => ['label' => __('Secondary (Mint Green)', 'sudbury-cleaning'), 'default' => '#10B981'],
+        'sudbury_brand_orange' => ['label' => __('Accent (Soft Orange)', 'sudbury-cleaning'),  'default' => '#F59E0B'],
     ];
 
     foreach ($colors as $id => $cfg) {
@@ -148,7 +148,7 @@ add_action('customize_register', function (WP_Customize_Manager $wp_customize) {
         ]);
         $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, $id, [
             'label'   => $cfg['label'],
-            'section' => 'nova_brand',
+            'section' => 'sudbury_brand',
         ]));
     }
 });

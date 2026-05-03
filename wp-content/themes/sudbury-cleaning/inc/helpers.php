@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) { exit; }
 /**
  * Default site copy fallbacks. Customizer values win when set.
  */
-function nova_default(string $key): string {
+function sudbury_default(string $key): string {
     $defaults = [
         'business_name'    => 'Sudbury Sparkle Cleaning Co.',
         'tagline'          => 'Northern clean. Done right the first time.',
@@ -30,27 +30,27 @@ function nova_default(string $key): string {
     return $defaults[$key] ?? '';
 }
 
-function nova_setting(string $key, string $default = ''): string {
-    $val = get_theme_mod('nova_' . $key, '');
+function sudbury_setting(string $key, string $default = ''): string {
+    $val = get_theme_mod('sudbury_' . $key, '');
     if ($val === '' || $val === null) {
-        $val = $default !== '' ? $default : nova_default($key);
+        $val = $default !== '' ? $default : sudbury_default($key);
     }
     return (string) $val;
 }
 
-function nova_phone_link(string $phone = ''): string {
-    if ($phone === '') { $phone = nova_setting('phone'); }
+function sudbury_phone_link(string $phone = ''): string {
+    if ($phone === '') { $phone = sudbury_setting('phone'); }
     return 'tel:' . preg_replace('/[^0-9+]/', '', $phone);
 }
 
-function nova_quote_url(): string {
-    return esc_url(nova_setting('hero_cta_url', '/contact/'));
+function sudbury_quote_url(): string {
+    return esc_url(sudbury_setting('hero_cta_url', '/contact/'));
 }
 
 /**
  * Inline SVG icons (small, accessible). Returns markup; never echo unsanitized input.
  */
-function nova_icon(string $name, int $size = 24): string {
+function sudbury_icon(string $name, int $size = 24): string {
     $paths = [
         /* Each path is centered within the 24x24 viewBox so the visible icon's
            bounding box has equal padding on top and bottom. This makes
@@ -89,7 +89,7 @@ function nova_icon(string $name, int $size = 24): string {
     );
 }
 
-function nova_print_icon(string $name, int $size = 24): void {
+function sudbury_print_icon(string $name, int $size = 24): void {
     /* Keys MUST be lowercase — wp_kses lowercases attribute names before
        matching against this list, so 'viewBox' (camelCase) gets silently
        stripped. The SVG won't render correctly without viewBox. */
@@ -99,13 +99,13 @@ function nova_print_icon(string $name, int $size = 24): void {
         'circle' => ['cx' => true, 'cy' => true, 'r' => true],
         'rect'   => ['x' => true, 'y' => true, 'width' => true, 'height' => true, 'rx' => true],
     ];
-    echo wp_kses(nova_icon($name, $size), $allowed);
+    echo wp_kses(sudbury_icon($name, $size), $allowed);
 }
 
 /**
  * Excerpt with custom length, fallback to trimmed content.
  */
-function nova_excerpt(int $words = 22): string {
+function sudbury_excerpt(int $words = 22): string {
     $excerpt = has_excerpt() ? get_the_excerpt() : wp_strip_all_tags(get_the_content());
     return wp_trim_words($excerpt, $words, '…');
 }
@@ -114,7 +114,7 @@ function nova_excerpt(int $words = 22): string {
  * Render a fallback nav <ul> when no Primary menu is set.
  * Only links to pages that exist in the database, so links are never dead.
  */
-function nova_render_fallback_nav(): void {
+function sudbury_render_fallback_nav(): void {
     $items = [];
     $items[] = ['label' => __('Home', 'sudbury-cleaning'), 'url' => home_url('/')];
 
@@ -144,15 +144,15 @@ function nova_render_fallback_nav(): void {
     echo '</ul>';
 }
 
-/* nova_default_areas() and nova_default_services() are defined by the
+/* sudbury_default_areas() and sudbury_default_services() are defined by the
    Sparkle Core plugin (wp-content/plugins/sparkle-core/includes/defaults.php).
    The function_exists() guards below provide identical fallbacks so the
    theme keeps rendering even if Sparkle Core hasn't been activated yet.
    Plugins load before themes, so when Sparkle Core IS active, its versions
    are already declared and these blocks are skipped. */
 
-if (!function_exists('nova_default_areas')) {
-    function nova_default_areas(): array {
+if (!function_exists('sudbury_default_areas')) {
+    function sudbury_default_areas(): array {
         return [
             ['name' => 'Sudbury',     'slug' => 'sudbury'],
             ['name' => 'Lively',      'slug' => 'lively'],
@@ -164,8 +164,8 @@ if (!function_exists('nova_default_areas')) {
     }
 }
 
-if (!function_exists('nova_default_services')) {
-    function nova_default_services(): array {
+if (!function_exists('sudbury_default_services')) {
+    function sudbury_default_services(): array {
         return [
             ['icon' => 'home',      'title' => 'Residential Cleaning',  'body' => 'Weekly, biweekly, or one-time cleans for homes across Greater Sudbury.'],
             ['icon' => 'briefcase', 'title' => 'Office & Commercial',   'body' => 'Reliable evening and weekend cleaning for offices, clinics, and retail.'],

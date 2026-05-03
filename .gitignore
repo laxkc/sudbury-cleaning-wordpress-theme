@@ -51,6 +51,7 @@ build/
 /wp-content/backups/
 /wp-content/wflogs/
 /wp-content/blogs.dir/
+/wp-content/logs/
 
 # Local config — never commit secrets
 wp-config.php

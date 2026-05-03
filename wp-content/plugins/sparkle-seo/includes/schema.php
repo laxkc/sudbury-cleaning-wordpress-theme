@@ -15,18 +15,18 @@ function sparkle_seo_render_jsonld(): void {
 
     if (is_front_page()) {
         $area_names = [];
-        if (function_exists('nova_default_areas')) {
-            $area_names = array_map(static fn($a) => $a['name'], nova_default_areas());
+        if (function_exists('sudbury_default_areas')) {
+            $area_names = array_map(static fn($a) => $a['name'], sudbury_default_areas());
         }
 
         $schemas[] = array_filter([
             '@context'    => 'https://schema.org',
             '@type'       => 'HouseCleaningService',
             'name'        => get_bloginfo('name'),
-            'description' => function_exists('nova_setting') ? nova_setting('hero_lead') : get_bloginfo('description'),
+            'description' => function_exists('sudbury_setting') ? sudbury_setting('hero_lead') : get_bloginfo('description'),
             'url'         => home_url('/'),
-            'telephone'   => function_exists('nova_setting') ? nova_setting('phone') : '',
-            'email'       => function_exists('nova_setting') ? nova_setting('email') : '',
+            'telephone'   => function_exists('sudbury_setting') ? sudbury_setting('phone') : '',
+            'email'       => function_exists('sudbury_setting') ? sudbury_setting('email') : '',
             'priceRange'  => '$$',
             'address'     => [
                 '@type'           => 'PostalAddress',

@@ -27,7 +27,7 @@ if (empty($items)) {
 
     <div class="grid grid--3">
       <?php if (!empty($items)): foreach ($items as $t):
-          $where = get_post_meta($t->ID, '_nova_testimonial_location', true) ?: '';
+          $where = get_post_meta($t->ID, '_sudbury_testimonial_location', true) ?: '';
       ?>
         <blockquote class="testimonial">
           <p class="testimonial__quote"><?php echo esc_html(wp_strip_all_tags(get_the_content(null, false, $t))); ?></p>

@@ -22,8 +22,8 @@ function sparkle_seo_render_meta(): void {
         }
         $url = get_permalink() ?: $url;
     } else {
-        $description = function_exists('nova_setting')
-            ? nova_setting('hero_lead')
+        $description = function_exists('sudbury_setting')
+            ? sudbury_setting('hero_lead')
             : get_bloginfo('description');
     }
 

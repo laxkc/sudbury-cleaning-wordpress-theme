@@ -27,22 +27,22 @@ while (have_posts()): the_post(); ?>
             foreach ($areas as $a):
         ?>
           <article class="card">
-            <div class="card__icon"><?php nova_print_icon('pin', 28); ?></div>
+            <div class="card__icon"><?php sudbury_print_icon('pin', 28); ?></div>
             <h3 class="card__title"><a href="<?php echo esc_url(get_permalink($a)); ?>" style="color:inherit;"><?php echo esc_html(get_the_title($a)); ?></a></h3>
             <p class="card__body"><?php echo esc_html(wp_trim_words(get_the_excerpt($a) ?: get_the_content(null, false, $a), 18)); ?></p>
             <a class="card__link" href="<?php echo esc_url(get_permalink($a)); ?>">
               <span><?php esc_html_e('Cleaning in this area', 'sudbury-cleaning'); ?></span>
-              <span class="icon-label__icon"><?php nova_print_icon('arrow-right', 12); ?></span>
+              <span class="icon-label__icon"><?php sudbury_print_icon('arrow-right', 12); ?></span>
             </a>
           </article>
-        <?php endforeach; else: foreach (nova_default_areas() as $a): ?>
+        <?php endforeach; else: foreach (sudbury_default_areas() as $a): ?>
           <article class="card">
-            <div class="card__icon"><?php nova_print_icon('pin', 28); ?></div>
+            <div class="card__icon"><?php sudbury_print_icon('pin', 28); ?></div>
             <h3 class="card__title"><?php echo esc_html($a['name']); ?></h3>
             <p class="card__body"><?php printf(esc_html__('House and office cleaning across %s and nearby Sudbury neighborhoods.', 'sudbury-cleaning'), esc_html($a['name'])); ?></p>
             <a class="card__link" href="<?php echo esc_url(home_url('/service-areas/' . $a['slug'] . '/')); ?>">
               <span><?php esc_html_e('Learn more', 'sudbury-cleaning'); ?></span>
-              <span class="icon-label__icon"><?php nova_print_icon('arrow-right', 12); ?></span>
+              <span class="icon-label__icon"><?php sudbury_print_icon('arrow-right', 12); ?></span>
             </a>
           </article>
         <?php endforeach; endif; ?>

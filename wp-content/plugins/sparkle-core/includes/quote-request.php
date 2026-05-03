@@ -1,7 +1,7 @@
 <?php
 /**
  * Quote Request — admin meta box that displays submitted form fields.
- * Reads meta keys with `_nova_` prefix (kept for backward-compat with
+ * Reads meta keys with `_sudbury_` prefix (kept for backward-compat with
  * existing submissions stored under that prefix).
  */
 
@@ -26,7 +26,7 @@ function sparkle_render_quote_meta($post): void {
     ];
     echo '<table class="form-table"><tbody>';
     foreach ($fields as $key) {
-        $value = get_post_meta($post->ID, '_nova_' . $key, true);
+        $value = get_post_meta($post->ID, '_sudbury_' . $key, true);
         if ($value === '' || $value === null) { continue; }
         printf(
             '<tr><th style="text-align:left;width:160px;">%s</th><td>%s</td></tr>',

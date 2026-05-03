@@ -20,26 +20,26 @@ get_header(); ?>
       <div class="grid grid--3">
         <?php while (have_posts()): the_post(); ?>
           <article class="card">
-            <div class="card__icon"><?php nova_print_icon('sparkle', 28); ?></div>
+            <div class="card__icon"><?php sudbury_print_icon('sparkle', 28); ?></div>
             <h2 class="card__title"><a href="<?php the_permalink(); ?>" style="color:inherit;"><?php the_title(); ?></a></h2>
             <p class="card__body"><?php echo esc_html(wp_trim_words(get_the_excerpt() ?: get_the_content(), 22)); ?></p>
             <a class="card__link" href="<?php the_permalink(); ?>">
               <span><?php esc_html_e('Learn more', 'sudbury-cleaning'); ?></span>
-              <span class="icon-label__icon"><?php nova_print_icon('arrow-right', 12); ?></span>
+              <span class="icon-label__icon"><?php sudbury_print_icon('arrow-right', 12); ?></span>
             </a>
           </article>
         <?php endwhile; ?>
       </div>
     <?php else: ?>
       <div class="grid grid--3">
-        <?php foreach (nova_default_services() as $svc): ?>
+        <?php foreach (sudbury_default_services() as $svc): ?>
           <article class="card">
-            <div class="card__icon"><?php nova_print_icon($svc['icon'], 28); ?></div>
+            <div class="card__icon"><?php sudbury_print_icon($svc['icon'], 28); ?></div>
             <h2 class="card__title"><?php echo esc_html($svc['title']); ?></h2>
             <p class="card__body"><?php echo esc_html($svc['body']); ?></p>
-            <a class="card__link" href="<?php echo esc_url(nova_quote_url()); ?>">
+            <a class="card__link" href="<?php echo esc_url(sudbury_quote_url()); ?>">
               <span><?php esc_html_e('Get a quote', 'sudbury-cleaning'); ?></span>
-              <span class="icon-label__icon"><?php nova_print_icon('arrow-right', 12); ?></span>
+              <span class="icon-label__icon"><?php sudbury_print_icon('arrow-right', 12); ?></span>
             </a>
           </article>
         <?php endforeach; ?>

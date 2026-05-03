@@ -9,7 +9,7 @@ while (have_posts()): the_post(); ?>
   <section class="section section--white" style="text-align:center; padding-block: var(--space-9);">
     <div class="container" style="max-width: 640px;">
       <div class="icon-xl" style="color: var(--brand-mint); margin-bottom: var(--space-4);">
-        <?php nova_print_icon('sparkle'); ?>
+        <?php sudbury_print_icon('sparkle'); ?>
       </div>
       <h1><?php the_title(); ?></h1>
       <div class="article__content">

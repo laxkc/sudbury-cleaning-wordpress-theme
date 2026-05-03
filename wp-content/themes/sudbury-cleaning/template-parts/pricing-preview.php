@@ -44,10 +44,10 @@ $tiers = [
           <div class="price-card__price"><?php echo esc_html($t['price']); ?> <small><?php echo esc_html($t['unit']); ?></small></div>
           <ul>
             <?php foreach ($t['features'] as $f): ?>
-              <li class="icon-label icon-label--start"><span class="icon-label__icon"><?php nova_print_icon('check', 12); ?></span><span><?php echo esc_html($f); ?></span></li>
+              <li class="icon-label icon-label--start"><span class="icon-label__icon"><?php sudbury_print_icon('check', 12); ?></span><span><?php echo esc_html($f); ?></span></li>
             <?php endforeach; ?>
           </ul>
-          <a class="btn <?php echo $t['featured'] ? 'btn--primary' : 'btn--outline'; ?>" href="<?php echo esc_url(nova_quote_url()); ?>">
+          <a class="btn <?php echo $t['featured'] ? 'btn--primary' : 'btn--outline'; ?>" href="<?php echo esc_url(sudbury_quote_url()); ?>">
             <?php esc_html_e('Get exact quote', 'sudbury-cleaning'); ?>
           </a>
         </div>

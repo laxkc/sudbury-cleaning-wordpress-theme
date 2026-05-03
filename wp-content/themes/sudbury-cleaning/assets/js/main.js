@@ -1,6 +1,26 @@
 (function () {
   'use strict';
 
+  var settings = window.SudburySettings || { debug: false, version: '' };
+  var sudbury = {
+    debug: !!settings.debug,
+    version: settings.version || '',
+    log: function (event, ctx) {
+      if (!sudbury.debug) return;
+      console.log('[sudbury]', { event: event, ctx: ctx, version: sudbury.version, time: new Date().toISOString() });
+    },
+    warn: function (event, ctx) {
+      if (!sudbury.debug) return;
+      console.warn('[sudbury]', { event: event, ctx: ctx, version: sudbury.version, time: new Date().toISOString() });
+    },
+    error: function (event, ctx) {
+      if (!sudbury.debug) return;
+      console.error('[sudbury]', { event: event, ctx: ctx, version: sudbury.version, time: new Date().toISOString() });
+    }
+  };
+  window.sudbury = sudbury;
+  sudbury.log('theme_loaded');
+
   // Mobile menu toggle
   var toggle = document.querySelector('.menu-toggle');
   var drawer = document.getElementById('mobile-drawer');
@@ -11,6 +31,7 @@
       toggle.setAttribute('aria-expanded', String(!open));
       drawer.setAttribute('aria-hidden', String(open));
       document.body.style.overflow = open ? '' : 'hidden';
+      sudbury.log('mobile_menu_toggled', { open: !open });
     });
 
     // Close drawer when a link inside is clicked
@@ -29,10 +50,16 @@
         toggle.focus();
       }
     });
+  } else if (document.querySelector('.site-header')) {
+    sudbury.warn('mobile_menu_missing');
   }
 
   // FAQ accordion (data-faq toggles within .faq-list)
-  document.querySelectorAll('.faq-q').forEach(function (btn) {
+  var faqButtons = document.querySelectorAll('.faq-q');
+  if (document.querySelector('.faq-list') && faqButtons.length === 0) {
+    sudbury.warn('faq_buttons_missing');
+  }
+  faqButtons.forEach(function (btn) {
     btn.addEventListener('click', function () {
       var expanded = btn.getAttribute('aria-expanded') === 'true';
       var panelId = btn.getAttribute('aria-controls');

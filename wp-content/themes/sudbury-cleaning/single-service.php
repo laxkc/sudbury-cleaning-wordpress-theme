@@ -5,9 +5,9 @@
 get_header();
 
 while (have_posts()): the_post();
-    $included     = get_post_meta(get_the_ID(), '_nova_service_included', true);
-    $not_included = get_post_meta(get_the_ID(), '_nova_service_not_included', true);
-    $price_from   = get_post_meta(get_the_ID(), '_nova_service_price_from', true);
+    $included     = get_post_meta(get_the_ID(), '_sudbury_service_included', true);
+    $not_included = get_post_meta(get_the_ID(), '_sudbury_service_not_included', true);
+    $price_from   = get_post_meta(get_the_ID(), '_sudbury_service_price_from', true);
 ?>
 
   <section class="section section--blue">
@@ -18,12 +18,12 @@ while (have_posts()): the_post();
         <p class="lead" style="max-width: 720px;"><?php echo esc_html(get_the_excerpt()); ?></p>
       <?php endif; ?>
       <div class="cta-banner__actions" style="justify-content: flex-start; margin-top: var(--space-5);">
-        <a class="btn btn--primary btn--lg" href="<?php echo esc_url(nova_quote_url()); ?>">
+        <a class="btn btn--primary btn--lg" href="<?php echo esc_url(sudbury_quote_url()); ?>">
           <span><?php esc_html_e('Get a free quote', 'sudbury-cleaning'); ?></span>
         </a>
-        <a class="btn btn--phone btn--lg" href="<?php echo esc_attr(nova_phone_link()); ?>">
-          <span class="icon-label__icon"><?php nova_print_icon('phone', 14); ?></span>
-          <span><?php echo esc_html(nova_setting('phone')); ?></span>
+        <a class="btn btn--phone btn--lg" href="<?php echo esc_attr(sudbury_phone_link()); ?>">
+          <span class="icon-label__icon"><?php sudbury_print_icon('phone', 14); ?></span>
+          <span><?php echo esc_html(sudbury_setting('phone')); ?></span>
         </a>
       </div>
     </div>
@@ -33,7 +33,7 @@ while (have_posts()): the_post();
     <div class="container" style="max-width: 880px;">
       <article class="article" style="padding-block: 0;">
         <?php if (has_post_thumbnail()): ?>
-          <?php the_post_thumbnail('nova-hero', ['style' => 'border-radius: var(--radius); margin-bottom: var(--space-6);']); ?>
+          <?php the_post_thumbnail('sudbury-hero', ['style' => 'border-radius: var(--radius); margin-bottom: var(--space-6);']); ?>
         <?php endif; ?>
         <div class="article__content">
           <?php the_content(); ?>
@@ -47,7 +47,7 @@ while (have_posts()): the_post();
                 if ($item === '') continue;
             ?>
               <li class="icon-label icon-label--start" style="display:flex; gap: var(--space-2); align-items:flex-start;">
-                <span class="icon-label__icon"><?php nova_print_icon('check', 12); ?></span>
+                <span class="icon-label__icon"><?php sudbury_print_icon('check', 12); ?></span>
                 <span><?php echo esc_html($item); ?></span>
               </li>
             <?php endforeach; ?>
@@ -63,7 +63,7 @@ while (have_posts()): the_post();
           <div class="card" style="margin-top: var(--space-6);">
             <h3 style="margin-bottom: var(--space-2);"><?php esc_html_e('Pricing', 'sudbury-cleaning'); ?></h3>
             <p class="muted"><?php printf(esc_html__('Starting from %s. Final price depends on size, condition, and frequency.', 'sudbury-cleaning'), esc_html($price_from)); ?></p>
-            <a class="btn btn--primary" href="<?php echo esc_url(nova_quote_url()); ?>"><?php esc_html_e('Get exact quote', 'sudbury-cleaning'); ?></a>
+            <a class="btn btn--primary" href="<?php echo esc_url(sudbury_quote_url()); ?>"><?php esc_html_e('Get exact quote', 'sudbury-cleaning'); ?></a>
           </div>
         <?php endif; ?>
       </article>

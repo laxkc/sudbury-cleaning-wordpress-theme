@@ -2,10 +2,10 @@
 /**
  * Sparkle Forms — Quote / Contact form.
  * Shortcode: [sparkle_quote_form]
- * Form posts to admin-post.php with action=nova_quote_submit.
+ * Form posts to admin-post.php with action=sudbury_quote_submit.
  *
- * Meta keys are kept under the `_nova_` prefix and transient/action names
- * under the `nova_` prefix for backward compatibility with submissions and
+ * Meta keys are kept under the `_sudbury_` prefix and transient/action names
+ * under the `sudbury_` prefix for backward compatibility with submissions and
  * rate-limit counters created before the plugin split.
  */
 
@@ -17,8 +17,8 @@ function sparkle_render_quote_form($atts = []): string {
     $atts = shortcode_atts(['title' => __('Get a Free Quote', 'sparkle-forms')], $atts, 'sparkle_quote_form');
 
     $status = isset($_GET['quote']) ? sanitize_key($_GET['quote']) : '';
-    $errors = get_transient('nova_quote_errors_' . sparkle_form_client_key());
-    if ($errors) { delete_transient('nova_quote_errors_' . sparkle_form_client_key()); }
+    $errors = get_transient('sudbury_quote_errors_' . sparkle_form_client_key());
+    if ($errors) { delete_transient('sudbury_quote_errors_' . sparkle_form_client_key()); }
 
     ob_start();
     ?>
@@ -40,9 +40,9 @@ function sparkle_render_quote_form($atts = []): string {
         <?php endif; ?>
 
         <form class="form quote-form" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post" novalidate>
-            <input type="hidden" name="action" value="nova_quote_submit">
-            <?php wp_nonce_field('nova_quote_submit', 'nova_quote_nonce'); ?>
-            <input type="hidden" name="nova_form_started" value="<?php echo esc_attr(time()); ?>">
+            <input type="hidden" name="action" value="sudbury_quote_submit">
+            <?php wp_nonce_field('sudbury_quote_submit', 'sudbury_quote_nonce'); ?>
+            <input type="hidden" name="sudbury_form_started" value="<?php echo esc_attr(time()); ?>">
 
             <div class="form-honeypot" aria-hidden="true">
                 <label>Website (leave blank)
@@ -156,7 +156,7 @@ function sparkle_form_service_options(): array {
         'order'          => 'ASC',
     ]);
     if (empty($items)) {
-        $defaults = function_exists('nova_default_services') ? nova_default_services() : [];
+        $defaults = function_exists('sudbury_default_services') ? sudbury_default_services() : [];
         $out = [];
         foreach ($defaults as $svc) {
             $slug = sanitize_title($svc['title']);
@@ -177,7 +177,7 @@ function sparkle_form_area_options(): array {
         'order'          => 'ASC',
     ]);
     if (empty($items)) {
-        $defaults = function_exists('nova_default_areas') ? nova_default_areas() : [];
+        $defaults = function_exists('sudbury_default_areas') ? sudbury_default_areas() : [];
         $out = [];
         foreach ($defaults as $a) { $out[$a['slug']] = $a['name']; }
         return $out;
@@ -193,17 +193,17 @@ function sparkle_form_client_key(): string {
 }
 
 /**
- * Form handler — registered on admin_post hooks (action=nova_quote_submit).
+ * Form handler — registered on admin_post hooks (action=sudbury_quote_submit).
  * The action name is preserved from pre-split for backward-compat.
  */
-add_action('admin_post_nova_quote_submit',        'sparkle_handle_quote_submit');
-add_action('admin_post_nopriv_nova_quote_submit', 'sparkle_handle_quote_submit');
+add_action('admin_post_sudbury_quote_submit',        'sparkle_handle_quote_submit');
+add_action('admin_post_nopriv_sudbury_quote_submit', 'sparkle_handle_quote_submit');
 
 function sparkle_handle_quote_submit(): void {
     $referer = wp_get_referer() ?: home_url('/');
 
     /* Nonce */
-    if (!isset($_POST['nova_quote_nonce']) || !wp_verify_nonce($_POST['nova_quote_nonce'], 'nova_quote_submit')) {
+    if (!isset($_POST['sudbury_quote_nonce']) || !wp_verify_nonce($_POST['sudbury_quote_nonce'], 'sudbury_quote_submit')) {
         wp_safe_redirect(add_query_arg('quote', 'error', $referer));
         exit;
     }
@@ -215,14 +215,14 @@ function sparkle_handle_quote_submit(): void {
     }
 
     /* Timestamp gate (3 seconds minimum) */
-    $started = isset($_POST['nova_form_started']) ? (int) $_POST['nova_form_started'] : 0;
+    $started = isset($_POST['sudbury_form_started']) ? (int) $_POST['sudbury_form_started'] : 0;
     if ($started > 0 && (time() - $started) < 3) {
         wp_safe_redirect(add_query_arg('quote', 'success', $referer));
         exit;
     }
 
     /* Rate limit: 3 per hour per IP */
-    $rate_key = 'nova_quote_rate_' . sparkle_form_client_key();
+    $rate_key = 'sudbury_quote_rate_' . sparkle_form_client_key();
     $count    = (int) get_transient($rate_key);
     if ($count >= 3) {
         wp_safe_redirect(add_query_arg('quote', 'rate', $referer));
@@ -250,7 +250,7 @@ function sparkle_handle_quote_submit(): void {
     if ($data['phone'] === '')     { $errors['phone'] = __('Please enter a phone number.', 'sparkle-forms'); }
 
     if (!empty($errors)) {
-        set_transient('nova_quote_errors_' . sparkle_form_client_key(), $errors, 60);
+        set_transient('sudbury_quote_errors_' . sparkle_form_client_key(), $errors, 60);
         wp_safe_redirect(add_query_arg('quote', 'invalid', $referer));
         exit;
     }
@@ -265,14 +265,14 @@ function sparkle_handle_quote_submit(): void {
 
     if (!is_wp_error($post_id) && $post_id) {
         foreach ($data as $key => $val) {
-            update_post_meta($post_id, '_nova_' . $key, $val);
+            update_post_meta($post_id, '_sudbury_' . $key, $val);
         }
-        update_post_meta($post_id, '_nova_submitted_ip', isset($_SERVER['REMOTE_ADDR']) ? sanitize_text_field($_SERVER['REMOTE_ADDR']) : '');
-        update_post_meta($post_id, '_nova_submitted_at', current_time('mysql'));
+        update_post_meta($post_id, '_sudbury_submitted_ip', isset($_SERVER['REMOTE_ADDR']) ? sanitize_text_field($_SERVER['REMOTE_ADDR']) : '');
+        update_post_meta($post_id, '_sudbury_submitted_at', current_time('mysql'));
     }
 
     /* Email owner — read configured destination from theme Customizer if present, else admin email. */
-    $to      = function_exists('nova_setting') ? nova_setting('quote_email', get_option('admin_email')) : get_option('admin_email');
+    $to      = function_exists('sudbury_setting') ? sudbury_setting('quote_email', get_option('admin_email')) : get_option('admin_email');
     $subject = sprintf('[%s] New quote request — %s', get_bloginfo('name'), $data['name']);
     $body    = "New quote request:\n\n";
     foreach ($data as $key => $val) {

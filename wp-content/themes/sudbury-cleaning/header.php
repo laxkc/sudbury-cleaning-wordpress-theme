@@ -19,7 +19,7 @@
       <?php the_custom_logo(); ?>
     <?php else: ?>
       <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo" aria-label="<?php echo esc_attr(get_bloginfo('name')); ?>">
-        <span class="site-logo__icon"><?php nova_print_icon('droplet', 32); ?></span>
+        <span class="site-logo__icon"><?php sudbury_print_icon('droplet', 32); ?></span>
         <span class="site-logo__text">
           <?php bloginfo('name'); ?>
           <span class="site-logo__sub"><?php esc_html_e('Cleaning Co.', 'sudbury-cleaning'); ?></span>
@@ -36,19 +36,19 @@
               'depth'          => 2,
           ]);
       } else {
-          nova_render_fallback_nav();
+          sudbury_render_fallback_nav();
       }
       ?>
     </nav>
 
     <div class="header-actions">
-      <a class="btn btn--primary btn--sm header-cta" href="<?php echo esc_url(nova_quote_url()); ?>">
-        <?php echo esc_html(nova_setting('hero_cta_text', 'Get a Free Quote')); ?>
+      <a class="btn btn--primary btn--sm header-cta" href="<?php echo esc_url(sudbury_quote_url()); ?>">
+        <?php echo esc_html(sudbury_setting('hero_cta_text', 'Get a Free Quote')); ?>
       </a>
 
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-drawer" aria-label="<?php esc_attr_e('Toggle menu', 'sudbury-cleaning'); ?>">
-        <span class="icon-open"><?php nova_print_icon('menu', 22); ?></span>
-        <span class="icon-close"><?php nova_print_icon('close', 22); ?></span>
+        <span class="icon-open"><?php sudbury_print_icon('menu', 22); ?></span>
+        <span class="icon-close"><?php sudbury_print_icon('close', 22); ?></span>
       </button>
     </div>
   </div>
@@ -59,11 +59,11 @@
   if (has_nav_menu('primary')) {
       wp_nav_menu(['theme_location' => 'primary', 'container' => false, 'depth' => 1]);
   } else {
-      nova_render_fallback_nav();
+      sudbury_render_fallback_nav();
   }
   ?>
-  <a class="btn btn--primary btn--block" href="<?php echo esc_url(nova_quote_url()); ?>">
-    <?php echo esc_html(nova_setting('hero_cta_text', 'Get a Free Quote')); ?>
+  <a class="btn btn--primary btn--block" href="<?php echo esc_url(sudbury_quote_url()); ?>">
+    <?php echo esc_html(sudbury_setting('hero_cta_text', 'Get a Free Quote')); ?>
   </a>
 </div>
 

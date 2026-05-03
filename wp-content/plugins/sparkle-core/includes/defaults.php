@@ -10,8 +10,8 @@
 
 if (!defined('ABSPATH')) { exit; }
 
-if (!function_exists('nova_default_areas')) {
-    function nova_default_areas(): array {
+if (!function_exists('sudbury_default_areas')) {
+    function sudbury_default_areas(): array {
         return [
             ['name' => 'Sudbury',     'slug' => 'sudbury'],
             ['name' => 'Lively',      'slug' => 'lively'],
@@ -23,8 +23,8 @@ if (!function_exists('nova_default_areas')) {
     }
 }
 
-if (!function_exists('nova_default_services')) {
-    function nova_default_services(): array {
+if (!function_exists('sudbury_default_services')) {
+    function sudbury_default_services(): array {
         return [
             ['icon' => 'home',      'title' => 'Residential Cleaning',  'body' => 'Weekly, biweekly, or one-time cleans for homes across Greater Sudbury.'],
             ['icon' => 'briefcase', 'title' => 'Office & Commercial',   'body' => 'Reliable evening and weekend cleaning for offices, clinics, and retail.'],

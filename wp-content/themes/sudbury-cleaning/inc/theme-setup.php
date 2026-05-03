@@ -6,7 +6,7 @@
 if (!defined('ABSPATH')) { exit; }
 
 add_action('after_setup_theme', function () {
-    load_theme_textdomain('sudbury-cleaning', NOVA_THEME_DIR . '/languages');
+    load_theme_textdomain('sudbury-cleaning', SUDBURY_THEME_DIR . '/languages');
 
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
@@ -29,9 +29,9 @@ add_action('after_setup_theme', function () {
         'footer'  => __('Footer Navigation', 'sudbury-cleaning'),
     ]);
 
-    add_image_size('nova-hero', 1600, 1000, true);
-    add_image_size('nova-card', 800, 600, true);
-    add_image_size('nova-square', 600, 600, true);
+    add_image_size('sudbury-hero', 1600, 1000, true);
+    add_image_size('sudbury-card', 800, 600, true);
+    add_image_size('sudbury-square', 600, 600, true);
 });
 
 /* Footer widget areas */
@@ -50,7 +50,7 @@ add_action('widgets_init', function () {
 
 /* Body classes for branding context */
 add_filter('body_class', function ($classes) {
-    $classes[] = 'nova';
+    $classes[] = 'sudbury';
     return $classes;
 });
 
@@ -98,16 +98,16 @@ add_action('admin_notices', function () {
  * Each page is created only if no page with that slug exists yet.
  * Pages are assigned the matching custom template so they look right immediately.
  */
-add_action('after_switch_theme', 'nova_provision_starter_pages');
+add_action('after_switch_theme', 'sudbury_provision_starter_pages');
 
 /* One-shot provisioner for users who activated the theme before this code existed. */
 add_action('admin_init', function () {
-    if (get_option('nova_starter_provisioned')) { return; }
-    nova_provision_starter_pages();
-    update_option('nova_starter_provisioned', 1);
+    if (get_option('sudbury_starter_provisioned')) { return; }
+    sudbury_provision_starter_pages();
+    update_option('sudbury_starter_provisioned', 1);
 });
 
-function nova_provision_starter_pages(): void {
+function sudbury_provision_starter_pages(): void {
     $pages = [
         'about'         => ['title' => 'About',         'template' => 'page-templates/page-about.php'],
         'services'      => ['title' => 'Services',      'template' => 'page-templates/page-services.php'],
@@ -143,12 +143,12 @@ function nova_provision_starter_pages(): void {
     }
 
     /* Build a default Primary menu pointing to those pages, if no menu exists. */
-    nova_provision_default_menu();
+    sudbury_provision_default_menu();
 
     flush_rewrite_rules();
 }
 
-function nova_provision_default_menu(): void {
+function sudbury_provision_default_menu(): void {
     $locations = get_theme_mod('nav_menu_locations', []);
     if (!empty($locations['primary'])) { return; }
 

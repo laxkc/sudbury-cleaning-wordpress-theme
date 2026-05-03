@@ -26,28 +26,28 @@ while (have_posts()): the_post(); ?>
 
       <div class="why-grid">
         <div class="why-item">
-          <span class="icon-label__icon"><?php nova_print_icon('home', 16); ?></span>
+          <span class="icon-label__icon"><?php sudbury_print_icon('home', 16); ?></span>
           <div>
             <h4><?php esc_html_e('Size of your space', 'sudbury-cleaning'); ?></h4>
             <p class="muted"><?php esc_html_e('Square footage and number of rooms.', 'sudbury-cleaning'); ?></p>
           </div>
         </div>
         <div class="why-item">
-          <span class="icon-label__icon"><?php nova_print_icon('spray', 16); ?></span>
+          <span class="icon-label__icon"><?php sudbury_print_icon('spray', 16); ?></span>
           <div>
             <h4><?php esc_html_e('Condition', 'sudbury-cleaning'); ?></h4>
             <p class="muted"><?php esc_html_e('First-time deep cleans take longer than maintenance visits.', 'sudbury-cleaning'); ?></p>
           </div>
         </div>
         <div class="why-item">
-          <span class="icon-label__icon"><?php nova_print_icon('clock', 16); ?></span>
+          <span class="icon-label__icon"><?php sudbury_print_icon('clock', 16); ?></span>
           <div>
             <h4><?php esc_html_e('Frequency', 'sudbury-cleaning'); ?></h4>
             <p class="muted"><?php esc_html_e('Weekly 15% off · Bi-weekly 10% · Monthly 5%.', 'sudbury-cleaning'); ?></p>
           </div>
         </div>
         <div class="why-item">
-          <span class="icon-label__icon"><?php nova_print_icon('check', 16); ?></span>
+          <span class="icon-label__icon"><?php sudbury_print_icon('check', 16); ?></span>
           <div>
             <h4><?php esc_html_e('Add-ons', 'sudbury-cleaning'); ?></h4>
             <p class="muted"><?php esc_html_e('Inside oven, fridge, windows, laundry — pay only for what you need.', 'sudbury-cleaning'); ?></p>

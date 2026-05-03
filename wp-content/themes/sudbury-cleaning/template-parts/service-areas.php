@@ -21,14 +21,14 @@ $using_defaults = empty($areas);
     </header>
 
     <div class="area-chips">
-      <?php if ($using_defaults): foreach (nova_default_areas() as $a): ?>
+      <?php if ($using_defaults): foreach (sudbury_default_areas() as $a): ?>
         <a class="area-chip" href="<?php echo esc_url(home_url('/service-areas/' . $a['slug'] . '/')); ?>">
-          <span class="icon-label__icon"><?php nova_print_icon('pin', 12); ?></span>
+          <span class="icon-label__icon"><?php sudbury_print_icon('pin', 12); ?></span>
           <span><?php echo esc_html($a['name']); ?></span>
         </a>
       <?php endforeach; else: foreach ($areas as $a): ?>
         <a class="area-chip" href="<?php echo esc_url(get_permalink($a)); ?>">
-          <span class="icon-label__icon"><?php nova_print_icon('pin', 12); ?></span>
+          <span class="icon-label__icon"><?php sudbury_print_icon('pin', 12); ?></span>
           <span><?php echo esc_html(get_the_title($a)); ?></span>
         </a>
       <?php endforeach; endif; ?>

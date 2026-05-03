@@ -7,12 +7,12 @@
 if (!defined('ABSPATH')) { exit; }
 
 add_action('wp_enqueue_scripts', function () {
-    $base = NOVA_THEME_URI . '/assets';
-    $dir  = NOVA_THEME_DIR . '/assets';
+    $base = SUDBURY_THEME_URI . '/assets';
+    $dir  = SUDBURY_THEME_DIR . '/assets';
 
     // Google Fonts: Poppins (600,700) + Inter (400,500,600)
     wp_enqueue_style(
-        'nova-fonts',
+        'sudbury-fonts',
         'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap',
         [],
         null
@@ -20,41 +20,46 @@ add_action('wp_enqueue_scripts', function () {
 
     // Theme stylesheets
     wp_enqueue_style(
-        'nova-base',
+        'sudbury-base',
         get_stylesheet_uri(),
-        ['nova-fonts'],
-        file_exists(NOVA_THEME_DIR . '/style.css') ? filemtime(NOVA_THEME_DIR . '/style.css') : NOVA_THEME_VERSION
+        ['sudbury-fonts'],
+        file_exists(SUDBURY_THEME_DIR . '/style.css') ? filemtime(SUDBURY_THEME_DIR . '/style.css') : SUDBURY_THEME_VERSION
     );
 
     wp_enqueue_style(
-        'nova-layout',
+        'sudbury-layout',
         $base . '/css/layout.css',
-        ['nova-base'],
-        file_exists($dir . '/css/layout.css') ? filemtime($dir . '/css/layout.css') : NOVA_THEME_VERSION
+        ['sudbury-base'],
+        file_exists($dir . '/css/layout.css') ? filemtime($dir . '/css/layout.css') : SUDBURY_THEME_VERSION
     );
 
     wp_enqueue_style(
-        'nova-components',
+        'sudbury-components',
         $base . '/css/components.css',
-        ['nova-layout'],
-        file_exists($dir . '/css/components.css') ? filemtime($dir . '/css/components.css') : NOVA_THEME_VERSION
+        ['sudbury-layout'],
+        file_exists($dir . '/css/components.css') ? filemtime($dir . '/css/components.css') : SUDBURY_THEME_VERSION
     );
 
     wp_enqueue_style(
-        'nova-responsive',
+        'sudbury-responsive',
         $base . '/css/responsive.css',
-        ['nova-components'],
-        file_exists($dir . '/css/responsive.css') ? filemtime($dir . '/css/responsive.css') : NOVA_THEME_VERSION
+        ['sudbury-components'],
+        file_exists($dir . '/css/responsive.css') ? filemtime($dir . '/css/responsive.css') : SUDBURY_THEME_VERSION
     );
 
     // Main JS
     wp_enqueue_script(
-        'nova-main',
+        'sudbury-main',
         $base . '/js/main.js',
         [],
-        file_exists($dir . '/js/main.js') ? filemtime($dir . '/js/main.js') : NOVA_THEME_VERSION,
+        file_exists($dir . '/js/main.js') ? filemtime($dir . '/js/main.js') : SUDBURY_THEME_VERSION,
         true
     );
+
+    wp_localize_script('sudbury-main', 'SudburySettings', [
+        'debug'   => defined('WP_DEBUG') && WP_DEBUG,
+        'version' => SUDBURY_THEME_VERSION,
+    ]);
 
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
@@ -71,7 +76,7 @@ add_filter('wp_resource_hints', function ($hints, $relation) {
 
 /* Defer non-critical JS */
 add_filter('script_loader_tag', function ($tag, $handle) {
-    if ('nova-main' === $handle) {
+    if ('sudbury-main' === $handle) {
         return str_replace(' src=', ' defer src=', $tag);
     }
     return $tag;
@@ -79,14 +84,14 @@ add_filter('script_loader_tag', function ($tag, $handle) {
 
 /* Inject brand color overrides from Customizer */
 add_action('wp_head', function () {
-    $blue   = get_theme_mod('nova_brand_blue', '#1E3A8A');
-    $orange = get_theme_mod('nova_brand_orange', '#F59E0B');
-    $mint   = get_theme_mod('nova_brand_mint', '#10B981');
+    $blue   = get_theme_mod('sudbury_brand_blue', '#1E3A8A');
+    $orange = get_theme_mod('sudbury_brand_orange', '#F59E0B');
+    $mint   = get_theme_mod('sudbury_brand_mint', '#10B981');
     if ($blue === '#1E3A8A' && $orange === '#F59E0B' && $mint === '#10B981') {
         return;
     }
     printf(
-        '<style id="nova-brand-overrides">:root{--brand-blue:%s;--brand-orange:%s;--brand-mint:%s;}</style>',
+        '<style id="sudbury-brand-overrides">:root{--brand-blue:%s;--brand-orange:%s;--brand-mint:%s;}</style>',
         esc_html($blue), esc_html($orange), esc_html($mint)
     );
 }, 20);

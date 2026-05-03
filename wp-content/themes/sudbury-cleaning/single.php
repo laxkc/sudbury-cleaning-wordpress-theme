@@ -21,7 +21,7 @@
         </p>
 
         <?php if (has_post_thumbnail()): ?>
-          <?php the_post_thumbnail('nova-hero', ['loading' => 'eager', 'style' => 'border-radius: var(--radius); margin-bottom: var(--space-6);']); ?>
+          <?php the_post_thumbnail('sudbury-hero', ['loading' => 'eager', 'style' => 'border-radius: var(--radius); margin-bottom: var(--space-6);']); ?>
         <?php endif; ?>
 
         <div class="article__content">

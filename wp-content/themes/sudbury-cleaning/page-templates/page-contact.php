@@ -28,34 +28,34 @@ while (have_posts()): the_post(); ?>
 
           <div class="contact-info">
             <div class="contact-info__item">
-              <span class="contact-info__icon"><?php nova_print_icon('phone', 18); ?></span>
+              <span class="contact-info__icon"><?php sudbury_print_icon('phone', 18); ?></span>
               <div class="contact-info__body">
                 <strong><?php esc_html_e('Phone', 'sudbury-cleaning'); ?></strong><br>
-                <a href="<?php echo esc_attr(nova_phone_link()); ?>"><?php echo esc_html(nova_setting('phone')); ?></a>
+                <a href="<?php echo esc_attr(sudbury_phone_link()); ?>"><?php echo esc_html(sudbury_setting('phone')); ?></a>
               </div>
             </div>
 
             <div class="contact-info__item">
-              <span class="contact-info__icon"><?php nova_print_icon('mail', 18); ?></span>
+              <span class="contact-info__icon"><?php sudbury_print_icon('mail', 18); ?></span>
               <div class="contact-info__body">
                 <strong><?php esc_html_e('Email', 'sudbury-cleaning'); ?></strong><br>
-                <a href="mailto:<?php echo esc_attr(nova_setting('email')); ?>"><?php echo esc_html(nova_setting('email')); ?></a>
+                <a href="mailto:<?php echo esc_attr(sudbury_setting('email')); ?>"><?php echo esc_html(sudbury_setting('email')); ?></a>
               </div>
             </div>
 
             <div class="contact-info__item">
-              <span class="contact-info__icon"><?php nova_print_icon('clock', 18); ?></span>
+              <span class="contact-info__icon"><?php sudbury_print_icon('clock', 18); ?></span>
               <div class="contact-info__body">
                 <strong><?php esc_html_e('Hours', 'sudbury-cleaning'); ?></strong><br>
-                <?php echo esc_html(nova_setting('hours')); ?>
+                <?php echo esc_html(sudbury_setting('hours')); ?>
               </div>
             </div>
 
             <div class="contact-info__item">
-              <span class="contact-info__icon"><?php nova_print_icon('pin', 18); ?></span>
+              <span class="contact-info__icon"><?php sudbury_print_icon('pin', 18); ?></span>
               <div class="contact-info__body">
                 <strong><?php esc_html_e('Service area', 'sudbury-cleaning'); ?></strong><br>
-                <?php echo esc_html(nova_setting('address')); ?>
+                <?php echo esc_html(sudbury_setting('address')); ?>
               </div>
             </div>
           </div>

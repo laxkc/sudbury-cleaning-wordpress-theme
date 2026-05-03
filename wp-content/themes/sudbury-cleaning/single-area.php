@@ -17,7 +17,7 @@ while (have_posts()): the_post(); ?>
         ?>
       </p>
       <div class="cta-banner__actions" style="justify-content: flex-start; margin-top: var(--space-5);">
-        <a class="btn btn--primary btn--lg" href="<?php echo esc_url(nova_quote_url()); ?>">
+        <a class="btn btn--primary btn--lg" href="<?php echo esc_url(sudbury_quote_url()); ?>">
           <?php esc_html_e('Get a free quote', 'sudbury-cleaning'); ?>
         </a>
       </div>
