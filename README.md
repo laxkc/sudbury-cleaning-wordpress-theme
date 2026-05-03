@@ -93,7 +93,6 @@ If a future maintainer switches themes, all data, forms, and SEO keep working. O
 │           ├── page-templates/
 │           ├── template-parts/
 │           └── assets/             css, js, images
-├── router.php                      PHP built-in server bootstrap
 ├── README.md
 └── .gitignore
 ```

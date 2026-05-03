@@ -63,6 +63,11 @@ wp-config.local.php
 /wp-content/themes/twentytwentyfour/
 /wp-content/themes/twentytwentyfive/
 
+# Default WordPress plugins (bundled by the wordpress image)
+/wp-content/plugins/akismet/
+/wp-content/plugins/hello.php
+/wp-content/plugins/index.php
+
 # =========================================================
 # Theme-local
 # =========================================================
