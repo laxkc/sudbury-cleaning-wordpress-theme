@@ -6,6 +6,26 @@ A custom WordPress build for a fictional Sudbury, Ontario cleaning service — s
 
 ---
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Problem](#problem)
+- [Solution](#solution)
+- [Architecture — 1 theme + 3 plugins](#architecture--1-theme--3-plugins)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Setup (Local Development)](#setup-local-development)
+- [Day-to-day usage](#day-to-day-usage)
+- [Key Implementation Details](#key-implementation-details)
+- [Debugging](#debugging)
+- [Troubleshooting](#troubleshooting)
+- [Screenshots](#screenshots)
+- [Future Improvements](#future-improvements)
+- [Author](#author)
+
+---
+
 ## Overview
 
 Custom WordPress build that simulates a real local-business client project, with focus on **performance, maintainability, and clean UI**.
@@ -58,9 +78,9 @@ If a future maintainer switches themes, all data, forms, and SEO keep working. O
 
 ## Tech Stack
 
-- **WordPress** running over **PostgreSQL** via [pg4wp](https://wordpress.org/plugins/postgresql-for-wordpress/)
-- **PHP 8.3** (PHP built-in server in dev — no Apache/nginx)
-- **Docker + Docker Compose** for local development
+- **WordPress** on **MySQL 8** (official `wordpress` Docker image — Apache + mod_php)
+- **Docker + Docker Compose** for local development (self-contained — no host services required)
+- **Adminer** for DB inspection
 - **Vanilla CSS** (no Sass, no Tailwind), **vanilla JS** (no jQuery, no framework)
 - **Google Fonts** — Poppins (headings) + Inter (body)
 - **No build step**, no `node_modules`
@@ -72,7 +92,7 @@ If a future maintainer switches themes, all data, forms, and SEO keep working. O
 ```
 .
 ├── docker/
-│   └── docker-compose.yml          WordPress + Adminer + PostgreSQL
+│   └── docker-compose.yml          WordPress + MySQL + Adminer
 ├── wp-content/
 │   ├── plugins/
 │   │   ├── sparkle-core/           CPTs + taxonomies + defaults
@@ -103,7 +123,8 @@ If a future maintainer switches themes, all data, forms, and SEO keep working. O
 
 ### Prerequisites
 - Docker Desktop (or Docker Engine + Compose v2)
-- A PostgreSQL instance on host port `5432` with database `prox`, user `postgres`, password `postgres`
+
+The stack is fully self-contained — MySQL runs as a service inside compose, no host-side database required.
 
 ### Run
 
@@ -185,6 +206,67 @@ Single source of truth: global rule `svg { width: 1em; height: 1em }` plus a reu
 
 ---
 
+## Debugging
+
+Debug mode is wired through one switch (`WORDPRESS_DEBUG` in compose) and split across two channels: PHP errors land in a host-readable file, JS errors land in the browser console.
+
+### PHP / WordPress errors
+
+Enabled by `WORDPRESS_DEBUG: 1` in `docker/docker-compose.yml`, which sets:
+
+| Constant | Value | Effect |
+|---|---|---|
+| `WP_DEBUG` | `true` | Surfaces PHP notices/warnings/deprecations |
+| `WP_DEBUG_LOG` | `/var/www/html/wp-content/logs/debug.log` | Writes errors to a host-mounted file |
+| `WP_DEBUG_DISPLAY` | `false` | Keeps errors out of the rendered page |
+| `SCRIPT_DEBUG` | `true` | Loads unminified WP core JS/CSS |
+
+**Where to read:**
+- WordPress-level errors → `wp-content/logs/debug.log` (host-readable, gitignored).
+  ```bash
+  tail -f wp-content/logs/debug.log
+  ```
+- Apache / MySQL / pre-WP-bootstrap errors → container stdout.
+  ```bash
+  cd docker && docker compose logs -f
+  ```
+
+The log is append-only; clear it with `: > wp-content/logs/debug.log` when it gets noisy.
+
+### Frontend JavaScript logs
+
+Same gate (`WP_DEBUG`), exposed to JS via `wp_localize_script` as `window.SudburySettings`. The theme creates a `window.sudbury` namespace with three methods that no-op when debug is off:
+
+```js
+sudbury.log('event_name', { context: 'value' });
+sudbury.warn('event_name');
+sudbury.error('event_name');
+```
+
+**Where to read:** browser dev-tools **Console** only — nothing is sent to the server or written to `debug.log`. Lines are tagged `[sudbury]` for grep-ability.
+
+**What's logged today:**
+
+| Trigger | Method | Event |
+|---|---|---|
+| JS executes on any page load | `log` | `theme_loaded` |
+| User toggles the mobile drawer (open or close) | `log` | `mobile_menu_toggled` |
+| Page has `.site-header` but no `.menu-toggle` / `#mobile-drawer` | `warn` | `mobile_menu_missing` |
+| Page has `.faq-list` but no `.faq-q` buttons | `warn` | `faq_buttons_missing` |
+
+### Toggling debug on/off
+
+```yaml
+# docker/docker-compose.yml
+environment:
+  WORDPRESS_DEBUG: 1   # 0 to disable
+```
+Then `cd docker && docker compose up -d` to apply.
+
+**Always set this to `0` (or remove it) before deploying to anything that's not your laptop.** Debug output can leak file paths, SQL fragments, and internal state.
+
+---
+
 ## Troubleshooting
 
 | Symptom | Cause | Fix |
@@ -194,6 +276,8 @@ Single source of truth: global rule `svg { width: 1em; height: 1em }` plus a reu
 | `[sparkle_quote_form]` shows as literal text | Sparkle Forms inactive | Activate it |
 | 404 on `/services/` or `/service-areas/` | Permalinks need flushing | **Settings → Permalinks** → *Save* |
 | Service entries not appearing in homepage grid | No services added yet | Create at least one in **Services → Add New** (defaults render until then) |
+| `wp-content/logs/debug.log` not appearing | `WORDPRESS_DEBUG` is off, or the host `wp-content/logs/` directory was deleted | Set `WORDPRESS_DEBUG: 1` in compose, recreate the dir, `docker compose up -d` |
+| `[sudbury]` lines missing in browser console | Stale cached `main.js`, or `SudburySettings.debug` is false | Hard-reload (Cmd/Ctrl + Shift + R), confirm `window.sudbury.debug === true` in the console |
 
 ---
 
